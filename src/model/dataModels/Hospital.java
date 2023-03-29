@@ -8,6 +8,15 @@ package model.dataModels;
 public class Hospital {
     String community;
     String name;
+    int numberOfEmployees;
+
+    public int getNumberOfEmployees() {
+        return numberOfEmployees;
+    }
+
+    public void setNumberOfEmployees(int numberOfEmployees) {
+        this.numberOfEmployees = numberOfEmployees;
+    }
 
     public String getCommunity() {
         return community;

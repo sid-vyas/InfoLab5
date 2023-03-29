@@ -17,16 +17,19 @@ public class HospitalDirectory {
         Hospital hospital1 = new Hospital();
         hospital1.setCommunity("Uptown");
         hospital1.setName("HealthPlus Hospital");
+        hospital1.setNumberOfEmployees(25);
         this.allHospitals.add(hospital1);
         
         Hospital hospital2 = new Hospital();
-        hospital1.setCommunity("Downtown");
-        hospital1.setName("CareHealth Hospital");
+        hospital2.setCommunity("Downtown");
+        hospital2.setName("CareHealth Hospital");
+        hospital2.setNumberOfEmployees(229);
         this.allHospitals.add(hospital2);
         
         Hospital hospital3 = new Hospital();
-        hospital1.setCommunity("York");
-        hospital1.setName("Plasma Hospital");
+        hospital3.setCommunity("York");
+        hospital3.setName("Plasma Hospital");
+        hospital3.setNumberOfEmployees(56);
         this.allHospitals.add(hospital3);
     }
     

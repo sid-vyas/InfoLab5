@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import model.directories.DoctorDirectory;
 import model.directories.HospitalDirectory;
 import model.directories.PatientDirectory;
-import view.SystemAdminLoginPanel;
 
 /**
  *
@@ -23,6 +22,7 @@ public class AdminLoginPanel extends javax.swing.JPanel {
      * Creates new form AdminLoginPanel
      */
     JPanel bottomPanel;
+    String adminType;
     DoctorDirectory allDoctors;
     HospitalDirectory allHospitals;
     PatientDirectory allPatients;
@@ -49,9 +49,8 @@ public class AdminLoginPanel extends javax.swing.JPanel {
         adminTypeLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
-        signUpButton = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        adminTypeMenu = new javax.swing.JComboBox<>();
 
         backButton.setText("< Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,19 +77,12 @@ public class AdminLoginPanel extends javax.swing.JPanel {
             }
         });
 
-        signUpButton.setText("Sign Up");
-        signUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButtonActionPerformed(evt);
-            }
-        });
-
         usernameLabel.setText("Enter Username:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System", "Community", "Hospital" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        adminTypeMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System", "Community", "Hospital" }));
+        adminTypeMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                adminTypeMenuActionPerformed(evt);
             }
         });
 
@@ -108,13 +100,12 @@ public class AdminLoginPanel extends javax.swing.JPanel {
                             .addComponent(adminTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(loginButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(signUpButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(adminTypeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(loginButton)))))
                 .addContainerGap(732, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,16 +120,14 @@ public class AdminLoginPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(adminTypeLabel)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(adminTypeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(usernameLabel)
                         .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginButton)
-                    .addComponent(signUpButton))
-                .addContainerGap(577, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(loginButton)
+                .addContainerGap(579, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,43 +142,39 @@ public class AdminLoginPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        
-   
-        
-            
-              
-        
         {                                  
         // TODO add your handling code here:
-        System.out.println(usernameField.getText());
-        if((jComboBox1.getSelectedItem().equals("System") && (usernameField.getText().equals("admin1") || usernameField.getText().equals("admin2")))  || (jComboBox1.getSelectedItem().equals("Community") && (usernameField.getText().equals("comm1") || usernameField.getText().equals("comm2")))) {
-            SystemAdminLoginPanel systemadminloginPanel = new SystemAdminLoginPanel(bottomPanel, allDoctors);
-            bottomPanel.add(systemadminloginPanel);
+        if(adminTypeMenu.getSelectedItem().equals("System")) {
+            adminType = "System";
+        } else if(adminTypeMenu.getSelectedItem().equals("Community")) {
+            adminType = "Community";
+        } else {
+            adminType = "Hospital";
+        }
+        
+        if((adminTypeMenu.getSelectedItem().equals("System") && (usernameField.getText().equals("admin1") || usernameField.getText().equals("admin2")))  || (adminTypeMenu.getSelectedItem().equals("Community") && (usernameField.getText().equals("comm1") || usernameField.getText().equals("comm2"))) || (adminTypeMenu.getSelectedItem().equals("Hospital") && (usernameField.getText().equals("hAdmin1") || usernameField.getText().equals("hAdmin2")))) {
+            AdminLandingPanel systemAdminLoginPanel = new AdminLandingPanel(adminType, allDoctors, allHospitals, allPatients);
+            bottomPanel.add(systemAdminLoginPanel);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);
             JOptionPane.showMessageDialog(bottomPanel, "You are logged in Successfully");
         } 
-      else {
+        else {
             JOptionPane.showMessageDialog(bottomPanel, "The entered username is incorrect", "Invalid Credentials", ERROR_MESSAGE);
         }  
                                               
     }//GEN-LAST:event_loginButtonActionPerformed
     }
-    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+    private void adminTypeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminTypeMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_signUpButtonActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_adminTypeMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adminTypeLabel;
+    private javax.swing.JComboBox<String> adminTypeMenu;
     private javax.swing.JButton backButton;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JButton signUpButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
