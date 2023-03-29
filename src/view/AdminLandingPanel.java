@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.directories.DoctorDirectory;
+import model.directories.EncounterDirectory;
 import model.directories.HospitalDirectory;
 import model.directories.PatientDirectory;
 
@@ -20,16 +21,18 @@ public class AdminLandingPanel extends javax.swing.JPanel {
     DoctorDirectory allDoctors;
     HospitalDirectory allHospitals;
     PatientDirectory allPatients;
+    EncounterDirectory allEncounters;
 
     /**
      * Creates new form SystemAdminLoginPanel
      */
-    public AdminLandingPanel(String adminType, DoctorDirectory allDoctors, HospitalDirectory allHospitals, PatientDirectory allPatients) {
+    public AdminLandingPanel(String adminType, DoctorDirectory allDoctors, HospitalDirectory allHospitals, PatientDirectory allPatients, EncounterDirectory allEncounters) {
         initComponents();
         this.adminType = adminType;
         this.allDoctors = allDoctors;
         this.allHospitals = allHospitals;
         this.allPatients = allPatients;
+        this.allEncounters = allEncounters;
         
         setButtons();
     }
@@ -86,18 +89,18 @@ public class AdminLandingPanel extends javax.swing.JPanel {
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(viewHospitalsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createDoctorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(createHospitalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(viewDoctorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(createDoctorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createHospitalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewDoctorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
-                .addGap(176, 176, 176)
+                .addGap(179, 179, 179)
                 .addComponent(createHospitalButton)
                 .addGap(68, 68, 68)
                 .addComponent(viewHospitalsButton)
@@ -105,7 +108,7 @@ public class AdminLandingPanel extends javax.swing.JPanel {
                 .addComponent(createDoctorButton)
                 .addGap(62, 62, 62)
                 .addComponent(viewDoctorsButton)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(leftPanel);
@@ -127,6 +130,10 @@ public class AdminLandingPanel extends javax.swing.JPanel {
 
     private void viewDoctorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctorsButtonActionPerformed
         // TODO add your handling code here
+        ViewDoctorsPanel viewDoctorsPanel = new ViewDoctorsPanel(allDoctors);
+        rightPanel.add(viewDoctorsPanel);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_viewDoctorsButtonActionPerformed
 
     private void viewHospitalsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewHospitalsButtonActionPerformed
@@ -147,6 +154,10 @@ public class AdminLandingPanel extends javax.swing.JPanel {
 
     private void createDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDoctorButtonActionPerformed
         // TODO add your handling code here:
+        DoctorSignUpPanel doctorSignUpPanel = new DoctorSignUpPanel(rightPanel, allDoctors, allPatients, allEncounters);
+        rightPanel.add(doctorSignUpPanel);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_createDoctorButtonActionPerformed
 
     private void setButtons() {

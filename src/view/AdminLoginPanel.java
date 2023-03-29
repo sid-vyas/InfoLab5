@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
 import model.directories.DoctorDirectory;
+import model.directories.EncounterDirectory;
 import model.directories.HospitalDirectory;
 import model.directories.PatientDirectory;
 
@@ -26,13 +27,15 @@ public class AdminLoginPanel extends javax.swing.JPanel {
     DoctorDirectory allDoctors;
     HospitalDirectory allHospitals;
     PatientDirectory allPatients;
+    EncounterDirectory allEncounters;
     
-    public AdminLoginPanel(JPanel bottomPanel, DoctorDirectory allDoctors, HospitalDirectory allHospitals, PatientDirectory allPatients) {
+    public AdminLoginPanel(JPanel bottomPanel, DoctorDirectory allDoctors, HospitalDirectory allHospitals, PatientDirectory allPatients, EncounterDirectory allEncounters) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.allDoctors = allDoctors;
         this.allHospitals = allHospitals;
         this.allPatients = allPatients;
+        this.allEncounters = allEncounters;
     }
 
     /**
@@ -153,7 +156,7 @@ public class AdminLoginPanel extends javax.swing.JPanel {
         }
         
         if((adminTypeMenu.getSelectedItem().equals("System") && (usernameField.getText().equals("admin1") || usernameField.getText().equals("admin2")))  || (adminTypeMenu.getSelectedItem().equals("Community") && (usernameField.getText().equals("comm1") || usernameField.getText().equals("comm2"))) || (adminTypeMenu.getSelectedItem().equals("Hospital") && (usernameField.getText().equals("hAdmin1") || usernameField.getText().equals("hAdmin2")))) {
-            AdminLandingPanel systemAdminLoginPanel = new AdminLandingPanel(adminType, allDoctors, allHospitals, allPatients);
+            AdminLandingPanel systemAdminLoginPanel = new AdminLandingPanel(adminType, allDoctors, allHospitals, allPatients, allEncounters);
             bottomPanel.add(systemAdminLoginPanel);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);

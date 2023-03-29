@@ -137,7 +137,7 @@ public class MainSystemJFrame extends javax.swing.JFrame {
 
     private void adminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginButtonActionPerformed
         // TODO add your handling code here:
-        AdminLoginPanel adminLoginPanel = new AdminLoginPanel(bottomPanel, allDoctors, allHospitals, allPatients);
+        AdminLoginPanel adminLoginPanel = new AdminLoginPanel(bottomPanel, allDoctors, allHospitals, allPatients, allEncounters);
         bottomPanel.add(adminLoginPanel);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -145,7 +145,7 @@ public class MainSystemJFrame extends javax.swing.JFrame {
 
     private void patientLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientLoginButtonActionPerformed
         // TODO add your handling code here:
-        PatientLoginPanel patientLoginPanel = new PatientLoginPanel(bottomPanel, allDoctors);
+        PatientLoginPanel patientLoginPanel = new PatientLoginPanel(bottomPanel, allDoctors, allPatients);
         bottomPanel.add(patientLoginPanel);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

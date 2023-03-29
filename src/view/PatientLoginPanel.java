@@ -8,7 +8,9 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JPanel;
+import model.dataModels.Patient;
 import model.directories.DoctorDirectory;
+import model.directories.PatientDirectory;
 
 /**
  *
@@ -17,14 +19,15 @@ import model.directories.DoctorDirectory;
 public class PatientLoginPanel extends javax.swing.JPanel {
     JPanel bottomPanel;
     DoctorDirectory allDoctors;
-
+    PatientDirectory allPatients;
     /**
      * Creates new form patientLoginScreen
      */
-    public PatientLoginPanel(JPanel bottomPanel, DoctorDirectory allDoctors) {
+    public PatientLoginPanel(JPanel bottomPanel, DoctorDirectory allDoctors, PatientDirectory allPatients) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.allDoctors = allDoctors;
+        this.allPatients = allPatients;
     }
 
     /**
@@ -108,8 +111,7 @@ public class PatientLoginPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println(usernameField.getText());
-        if(usernameField.getText().equals("patient") || usernameField.getText().equals("patient1") || usernameField.getText().equals("patient2")) {
+        if(isUsernameValid()) {
             DoctorSearchPanel doctorSearchPanel = new DoctorSearchPanel(bottomPanel, allDoctors);
             bottomPanel.add(doctorSearchPanel);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
@@ -124,6 +126,19 @@ public class PatientLoginPanel extends javax.swing.JPanel {
         bottomPanel.remove(this);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    Boolean isUsernameValid() {
+        if(usernameField.getText().equals("patient") || usernameField.getText().equals("patient1")) {
+            return true;
+        }
+        
+        for(Patient patient : allPatients.getAllPatients()) {
+            if(patient.getUsername().equals(usernameField.getText())) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
