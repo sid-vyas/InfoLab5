@@ -13,8 +13,8 @@ The roles we have here and their features are:
 5.	Hospital Admin: Can CRUD doctor details
 
 There are a few hard coded login IDs for all roles so that it is easy to test and the tester does not have to sign up each time. These are:
-6.	For Patients: 			patient, patient1
-7.	For Doctors: 			doctor, doctor1
-8.	For System Admin:		admin1, admin2
-9.	For Community Admin: 		comm1, comm2
-10.	For Hospital Admin: 		hAdmin1, hAdmin2
+1.	For Patients: 			patient, patient1
+2.	For Doctors: 			doctor, doctor1
+3.	For System Admin:		admin1, admin2
+4.	For Community Admin: 		comm1, comm2
+5.	For Hospital Admin: 		hAdmin1, hAdmin2
